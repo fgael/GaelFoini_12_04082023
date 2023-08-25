@@ -2,3 +2,18 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "tailwindcss/variants";
+/* Importe la font google roboto */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+body {
+  height: 100vh;
+  width: 100vw;
+  min-width: 1024px;
+  min-height: 763px;
+  font-family: "Roboto", sans-serif;
+  @media (max-width: 1023px) {
+    // height -108px pour la top navbar et la scrollbar
+    height: calc(100vh - 17px);
+  }
+}

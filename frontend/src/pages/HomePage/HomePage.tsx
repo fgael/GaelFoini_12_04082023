@@ -1,12 +1,12 @@
-import styles from "./HomePage.module.scss"; // Importe le fichier de style CSS module
+import styles from "./HomePage.module.scss";
+import HeaderNavBar from "../../components/HeaderNavBar/HeaderNavBar";
+import SideNavBar from "../../components/SideNavBar/SideNavBar";
 
 const HomePage = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <div className={styles.HomePage}>
-        <h1>module scss</h1>
-      </div>
+    <div className={styles.homePage}>
+      <HeaderNavBar />
+      <SideNavBar />
     </div>
   );
 };

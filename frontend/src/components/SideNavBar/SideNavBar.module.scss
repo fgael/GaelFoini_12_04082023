@@ -1,0 +1,19 @@
+.sideNavBarContainer {
+  @apply flex flex-col items-center justify-evenly;
+  width: 117px;
+  min-height: 672px;
+  // height - 91px pour la top navbar
+  height: calc(100vh - 91px);
+  background-color: black;
+
+  @media (max-width: 1023px) {
+    // height -108px pour la top navbar et la scrollbar
+    height: calc(100vh - 108px);
+  }
+
+  .copyright {
+    @apply -rotate-90;
+    color: white;
+    width: 200px;
+  }
+}

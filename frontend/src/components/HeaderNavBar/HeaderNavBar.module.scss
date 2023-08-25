@@ -1,0 +1,31 @@
+/* HeaderNavBar.module.scss */
+.headerNavBarContainer {
+  @apply flex;
+  height: 91px;
+  background-color: black;
+  color: white;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+
+  .logoContainer {
+    @apply flex ml-7 items-center;
+    width: 280px;
+
+    .logo {
+      height: 57.7px;
+      width: 57.2px;
+    }
+
+    .companyName {
+      @apply ml-3;
+      color: red;
+      left: 100px;
+    }
+  }
+
+  .navList {
+    @apply flex justify-around items-center;
+    width: 100%;
+  }
+}
