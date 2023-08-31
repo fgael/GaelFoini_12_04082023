@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import styles from "./HeaderNavBar.module.scss";
 import SportSeeLogo from "../../assets/logo.png";
 
@@ -13,18 +15,18 @@ const HeaderNavBar = () => {
         <div className={styles.companyName}>SportSee</div>
       </div>
       <ul className={styles.navList}>
-        <li>
-          <a href="/">Accueil</a>
-        </li>
-        <li>
-          <a href="/about">Profil</a>
-        </li>
-        <li>
-          <a href="/services">Réglage</a>
-        </li>
-        <li>
-          <a href="/contact">Communauté</a>
-        </li>
+        <NavLink to="/">
+          <li>Accueil</li>
+        </NavLink>
+        <NavLink to="/profil">
+          <li>Profil</li>
+        </NavLink>
+        <NavLink to="/settings">
+          <li>Réglage</li>
+        </NavLink>
+        <NavLink to="/community">
+          <li>Communauté</li>
+        </NavLink>
       </ul>
     </nav>
   );
