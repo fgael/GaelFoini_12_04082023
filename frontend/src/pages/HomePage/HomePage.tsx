@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { getUserInfo } from "../../services/api";
 
 import styles from "./HomePage.module.scss";
+import CardIcon from "../../components/CardIcon/CardIcon";
+
+import appleIcon from "../../assets/icons/apple.svg";
+import cheeseburgerIcon from "../../assets/icons/cheeseburger.svg";
+import chickenIcon from "../../assets/icons/chicken.svg";
+import energyIcon from "../../assets/icons/energy.svg";
 
 const HomePage: React.FC = () => {
   const [userInfo, setUserInfo] = useState<any>(null);
@@ -23,18 +29,42 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>User Information</h1>
-      <p>
-        Name: {userInfo.userInfos.firstName} {userInfo.userInfos.lastName}
+    <div className={styles.homePage}>
+      <h1>
+        Bonjour
+        <span className={styles.firstName}>
+          {" "}
+          {userInfo.userInfos.firstName}
+        </span>
+      </h1>
+      <p className={styles.subtitle}>
+        Félicitation ! Vous avez explosé vos objectifs hier 👏
       </p>
-      <p>Age: {userInfo.userInfos.age}</p>
+      <CardIcon
+        icon={energyIcon}
+        color="#FF0000"
+        content={userInfo.keyData.calorieCount + "kCal"}
+        title={"Calories"}
+      />
+      <CardIcon
+        icon={chickenIcon}
+        color="#4AB8FF"
+        content={userInfo.keyData.proteinCount + "g"}
+        title={"Proteines"}
+      />
+      <CardIcon
+        icon={appleIcon}
+        color="#F9CE23"
+        content={userInfo.keyData.carbohydrateCount + "g"}
+        title={"Glucides"}
+      />
+      <CardIcon
+        icon={cheeseburgerIcon}
+        color="#FD5181"
+        content={userInfo.keyData.lipidCount + "g"}
+        title={"Lipides"}
+      />
       <p>Today's Score: {userInfo.todayScore}</p>
-      <h2>Key Data</h2>
-      <p>Calorie Count: {userInfo.keyData.calorieCount}</p>
-      <p>Protein Count: {userInfo.keyData.proteinCount}</p>
-      <p>Carbohydrate Count: {userInfo.keyData.carbohydrateCount}</p>
-      <p>Lipid Count: {userInfo.keyData.lipidCount}</p>
     </div>
   );
 };

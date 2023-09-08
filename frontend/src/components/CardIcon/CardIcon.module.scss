@@ -1,0 +1,23 @@
+.cardContainer {
+  background-color: #fbfbfb;
+  width: 258px;
+  height: 124px;
+  @apply flex items-center pl-8 rounded-md mb-8;
+}
+
+.iconContainer {
+  @apply flex justify-center items-center rounded-md;
+  width: 60px;
+  height: 60px;
+}
+
+.cardImg {
+  height: 20px;
+}
+
+.contentContainer {
+  @apply ml-4;
+  .content {
+    @apply text-xl font-semibold;
+  }
+}

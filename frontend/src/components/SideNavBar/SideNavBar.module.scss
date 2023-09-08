@@ -1,19 +1,21 @@
-.sideNavBarContainer {
-  @apply flex flex-col items-center justify-evenly;
+.sideNavBarWrapper {
   width: 117px;
-  min-height: 672px;
+  // min-height 780px - 91px pour la top navbar
+  min-height: 689px;
   // height - 91px pour la top navbar
   height: calc(100vh - 91px);
-  background-color: black;
 
-  @media (max-width: 1023px) {
-    // height -108px pour la top navbar et la scrollbar
-    height: calc(100vh - 108px);
+  .sideNavBarContainer {
+    @apply flex flex-col items-center justify-end bg-black pt-8;
+    height: 100%;
+  }
+
+  .iconContainer {
+    @apply flex-1 flex flex-col justify-center relative bottom-40;
   }
 
   .copyright {
-    @apply -rotate-90;
-    color: white;
+    @apply -rotate-90 text-white relative bottom-36;
     width: 200px;
   }
 }
