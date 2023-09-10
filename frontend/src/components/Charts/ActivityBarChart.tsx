@@ -39,7 +39,7 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({ userId }) => {
     <ResponsiveContainer width="100%" height={300}>
       <BarChart data={userActivity}>
         <CartesianGrid strokeDasharray="2 2" vertical={false} />
-        <XAxis dataKey="date" tickLine={false} />
+        <XAxis dataKey="number" tickLine={false} />
         <YAxis
           dataKey="kilogram"
           yAxisId={1}

@@ -41,22 +41,30 @@ const HomePage: React.FC = () => {
         Félicitation ! Vous avez explosé vos objectifs hier 👏
       </p>
       <p>Today's Score: {user.todayScore}</p>
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-9 flex flex-col justify-between">
-          <ActivityBarChart userId={user.id} />
-          <div className="grid grid-cols-9 gap-4 mt-4">
-            <div className="col-span-3">
+      <div className="flex flex-row gap-4 lg:gap-8">
+        {/* Partie de gauche */}
+        <div className="flex flex-col grow justify-between gap-4 lg:gap-8 w-9/12 lg:w-10/12">
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <ActivityBarChart userId={user.id} />
+          </div>
+          <div className="grid grid-cols-12 gap-4 lg:gap-8">
+            <div className="col-span-4">
               <div className="h-64 bg-black"></div>
             </div>
-            <div className="col-span-3">
+            <div className="col-span-4">
               <div className="h-64 bg-red-900 "></div>
             </div>
-            <div className="col-span-3">
+            <div className="col-span-4">
               <div className="h-64 bg-indigo-400"></div>
             </div>
           </div>
         </div>
-        <div className="col-span-3 flex flex-col justify-between">
+
+        {/* Partie de droite */}
+        <div
+          className="flex flex-col justify-between w-3/12
+ lg:w-2/12"
+        >
           <CardIcon
             icon={energyIcon}
             color="#FF0000"
