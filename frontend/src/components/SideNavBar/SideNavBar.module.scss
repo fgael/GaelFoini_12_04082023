@@ -18,4 +18,11 @@
     @apply -rotate-90 text-white relative bottom-36;
     width: 200px;
   }
+  @media (max-height: 866px) {
+    min-height: 705px;
+    height: calc(100vh - 75px);
+  }
+  @media (max-width: 1200px) {
+    width: 90px;
+  }
 }

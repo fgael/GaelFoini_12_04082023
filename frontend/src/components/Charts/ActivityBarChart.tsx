@@ -36,7 +36,7 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({ userId }) => {
   }
 
   return (
-    <ResponsiveContainer width="100%" aspect={3}>
+    <ResponsiveContainer width="100%" height={300}>
       <BarChart data={userActivity}>
         <CartesianGrid strokeDasharray="2 2" vertical={false} />
         <XAxis dataKey="date" tickLine={false} />
@@ -64,16 +64,16 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({ userId }) => {
           dataKey="kilogram"
           yAxisId={1}
           fill="#282D30"
-          barSize={7}
-          radius={[7, 7, 0, 0]}
+          barSize={10}
+          radius={[15, 15, 0, 0]}
           name="Poids (kg)"
         />
         <Bar
           dataKey="calories"
           yAxisId={2}
           fill="#E60000"
-          barSize={7}
-          radius={[7, 7, 0, 0]}
+          barSize={10}
+          radius={[15, 15, 0, 0]}
           name="Calories brûlées (kCal)"
         />
       </BarChart>

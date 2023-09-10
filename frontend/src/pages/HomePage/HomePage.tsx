@@ -40,34 +40,49 @@ const HomePage: React.FC = () => {
       <p className={styles.subtitle}>
         Félicitation ! Vous avez explosé vos objectifs hier 👏
       </p>
-      <div className="container mx-auto p-4">
-        <ActivityBarChart userId={user.id} />
-      </div>
-      <CardIcon
-        icon={energyIcon}
-        color="#FF0000"
-        content={user.keyData.calorieCount + "kCal"}
-        title={"Calories"}
-      />
-      <CardIcon
-        icon={chickenIcon}
-        color="#4AB8FF"
-        content={user.keyData.proteinCount + "g"}
-        title={"Proteines"}
-      />
-      <CardIcon
-        icon={appleIcon}
-        color="#F9CE23"
-        content={user.keyData.carbohydrateCount + "g"}
-        title={"Glucides"}
-      />
-      <CardIcon
-        icon={cheeseburgerIcon}
-        color="#FD5181"
-        content={user.keyData.lipidCount + "g"}
-        title={"Lipides"}
-      />
       <p>Today's Score: {user.todayScore}</p>
+      <div className="grid grid-cols-12 gap-4">
+        <div className="col-span-9 flex flex-col justify-between">
+          <ActivityBarChart userId={user.id} />
+          <div className="grid grid-cols-9 gap-4 mt-4">
+            <div className="col-span-3">
+              <div className="h-64 bg-black"></div>
+            </div>
+            <div className="col-span-3">
+              <div className="h-64 bg-red-900 "></div>
+            </div>
+            <div className="col-span-3">
+              <div className="h-64 bg-indigo-400"></div>
+            </div>
+          </div>
+        </div>
+        <div className="col-span-3 flex flex-col justify-between">
+          <CardIcon
+            icon={energyIcon}
+            color="#FF0000"
+            content={user.keyData.calorieCount + "kCal"}
+            title={"Calories"}
+          />
+          <CardIcon
+            icon={chickenIcon}
+            color="#4AB8FF"
+            content={user.keyData.proteinCount + "g"}
+            title={"Proteines"}
+          />
+          <CardIcon
+            icon={appleIcon}
+            color="#F9CE23"
+            content={user.keyData.carbohydrateCount + "g"}
+            title={"Glucides"}
+          />
+          <CardIcon
+            icon={cheeseburgerIcon}
+            color="#FD5181"
+            content={user.keyData.lipidCount + "g"}
+            title={"Lipides"}
+          />
+        </div>
+      </div>
     </div>
   );
 };

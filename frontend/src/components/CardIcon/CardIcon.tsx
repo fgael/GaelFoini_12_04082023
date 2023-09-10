@@ -20,7 +20,7 @@ const CardIcon: React.FC<IconProps> = ({ icon, color, title, content }) => {
       </div>
       <div className={styles.contentContainer}>
         <p className={styles.content}>{content}</p>
-        <p className={styles.title}>{title}</p>
+        <p>{title}</p>
       </div>
     </div>
   );

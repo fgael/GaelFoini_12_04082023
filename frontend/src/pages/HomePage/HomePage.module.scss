@@ -12,4 +12,14 @@
     font-size: 18px;
     font-weight: 400;
   }
+  @media (max-height: 866px) {
+    h1 {
+      @apply my-2;
+      font-size: 36px;
+    }
+    .subtitle {
+      @apply mb-1;
+      font-size: 16px;
+    }
+  }
 }
