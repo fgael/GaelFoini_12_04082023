@@ -5,13 +5,10 @@
   min-height: 780px;
   width: 100vw;
   min-width: 1024px;
-
   @media (max-width: 1024px) {
-    // height -108px pour la top navbar et la scrollbar
     height: calc(100vh - 15px);
   }
   @media (max-height: 780px) {
-    // height -108px pour la top navbar et la scrollbar
     width: calc(100vw - 15px);
   }
 }
@@ -24,8 +21,11 @@ main {
   width: 80vw;
   height: 85vh;
   margin: auto;
+  @media (max-width: 1024px) {
+    @apply mx-4;
+    width: 100%;
+  }
   @media (max-height: 780px) {
-    // height -108px pour la top navbar et la scrollbar
-    height: 100vh;
+    height: 100%;
   }
 }

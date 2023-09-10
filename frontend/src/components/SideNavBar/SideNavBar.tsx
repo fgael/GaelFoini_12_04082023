@@ -1,17 +1,17 @@
 import SideNavBarIcon from "../SideNavBarIcon/SideNavBarIcon";
 import styles from "./SideNavBar.module.scss";
 
-import zenIcon from "../../assets/icons/icone-zen.png";
-import swimIcon from "../../assets/icons/icone-nage.png";
-import bicycleIcon from "../../assets/icons/icone-velo.png";
-import dumbbellIcon from "../../assets/icons/icone-haltere.png";
+import yogaIcon from "../../assets/icons/yoga.png";
+import swimIcon from "../../assets/icons/swim.png";
+import bicycleIcon from "../../assets/icons/bicycle.png";
+import dumbbellIcon from "../../assets/icons/dumbbell.png";
 
 const SideNavBar = () => {
   return (
     <div className={styles.sideNavBarWrapper}>
       <div className={styles.sideNavBarContainer}>
         <div className={styles.iconContainer}>
-          <SideNavBarIcon icon={zenIcon} />
+          <SideNavBarIcon icon={yogaIcon} />
           <SideNavBarIcon icon={swimIcon} />
           <SideNavBarIcon icon={bicycleIcon} />
           <SideNavBarIcon icon={dumbbellIcon} />
