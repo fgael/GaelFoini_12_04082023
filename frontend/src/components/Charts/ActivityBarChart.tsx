@@ -1,5 +1,3 @@
-import { useUserActivity } from "../../hooks/useUserActivity";
-
 import {
   BarChart,
   Bar,
@@ -12,12 +10,16 @@ import {
 } from "recharts";
 
 interface ActivityBarChartProps {
-  userId: number;
+  userActivity: any[];
+  loading: boolean;
+  error: any | null;
 }
 
-const ActivityBarChart: React.FC<ActivityBarChartProps> = ({ userId }) => {
-  const { userActivity, loading, error } = useUserActivity(userId);
-
+const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
+  userActivity,
+  loading,
+  error,
+}) => {
   if (loading) {
     return <div>Loading...</div>;
   }

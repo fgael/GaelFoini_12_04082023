@@ -9,6 +9,7 @@ interface UserInfo {
     age: number;
   };
   todayScore: number;
+  score: number;
   keyData: {
     calorieCount: number;
     proteinCount: number;

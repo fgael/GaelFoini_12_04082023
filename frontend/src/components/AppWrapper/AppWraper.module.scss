@@ -21,8 +21,10 @@ main {
   width: 80vw;
   height: 85vh;
   margin: auto;
+  @media (max-width: 1200px) {
+    @apply mx-6;
+  }
   @media (max-width: 1024px) {
-    @apply mx-4;
     width: 100%;
   }
   @media (max-height: 780px) {
