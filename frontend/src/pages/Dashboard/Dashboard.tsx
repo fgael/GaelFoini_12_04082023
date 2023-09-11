@@ -2,18 +2,22 @@ import React from "react";
 import { useUserInfo } from "../../hooks/useUserInfo";
 import { useUserActivity } from "../../hooks/useUserActivity";
 
-import styles from "./HomePage.module.scss";
+// import module style
+import styles from "./Dashboard.module.scss";
+
+// import composant
 import CardIcon from "../../components/CardIcon/CardIcon";
 import ActivityBarChart from "../../components/Charts/ActivityBarChart";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Snackbar from "../../components/Snackbar/Snackbar";
 
+// import icones
 import appleIcon from "../../assets/icons/apple.svg";
 import cheeseburgerIcon from "../../assets/icons/cheeseburger.svg";
 import chickenIcon from "../../assets/icons/chicken.svg";
 import energyIcon from "../../assets/icons/energy.svg";
 
-const HomePage: React.FC = () => {
+const Dashboard: React.FC = () => {
   const { user, loading: userLoading, error: userError } = useUserInfo(12);
   const {
     userActivity,
@@ -33,14 +37,14 @@ const HomePage: React.FC = () => {
   const hasUserData = user && userActivity && !userError && !activityError;
 
   return (
-    <div className={styles.homePage}>
+    <div className={styles.dashboard}>
       {hasUserData ? (
         <div>
           <h1>
             Bonjour
             <span className={styles.firstName}>
               &nbsp;
-              {user?.userInfos.firstName}
+              {user.userInfos.firstName}
             </span>
           </h1>
           <p className={styles.subtitle}>
@@ -51,11 +55,7 @@ const HomePage: React.FC = () => {
             {/* Partie de gauche */}
             <div className="flex flex-col grow justify-between gap-4 lg:gap-8 w-9/12 lg:w-10/12">
               <div className="bg-gray-50 p-4 rounded-lg">
-                <ActivityBarChart
-                  userActivity={userActivity}
-                  loading={activityLoading}
-                  error={activityError}
-                />
+                <ActivityBarChart userActivity={userActivity} />
               </div>
               <div className="grid grid-cols-12 gap-4 lg:gap-8">
                 <div className="col-span-4">
@@ -101,14 +101,15 @@ const HomePage: React.FC = () => {
         </div>
       ) : (
         <div>
-          {userError && <Snackbar message={`Erreur : ${userError.message}`} />}
-          {activityError && (
-            <Snackbar message={`Erreur : ${activityError.message}`} />
-          )}
+          {[userError, activityError]
+            .filter((error) => error)
+            .map((error, index) => (
+              <Snackbar key={index} message={`Erreur : ${error.message}`} />
+            ))}
         </div>
       )}
     </div>
   );
 };
 
-export default HomePage;
+export default Dashboard;

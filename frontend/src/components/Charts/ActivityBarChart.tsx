@@ -11,37 +11,29 @@ import {
 
 interface ActivityBarChartProps {
   userActivity: any[];
-  loading: boolean;
-  error: any | null;
 }
 
 const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
   userActivity,
-  loading,
-  error,
 }) => {
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!userActivity) {
-    return (
-      <div>
-        Erreur : Impossible de récupérer les données de l'utilisateur. Veuillez
-        réessayer ultérieurement.
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div>Erreur: {error}</div>;
-  }
-
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={userActivity}>
+      <BarChart
+        data={userActivity}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 30,
+          bottom: 5,
+        }}
+      >
         <CartesianGrid strokeDasharray="2 2" vertical={false} />
-        <XAxis dataKey="number" tickLine={false} />
+        <XAxis
+          dataKey="number"
+          tickLine={false}
+          axisLine={false}
+          scale="point"
+        />
         <YAxis
           dataKey="kilogram"
           yAxisId={1}
@@ -49,11 +41,33 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
           orientation="right"
           axisLine={false}
           allowDecimals={false}
+          tickLine={false}
+          tickMargin={25}
         />
         <YAxis dataKey="calories" yAxisId={2} hide />
-        <Tooltip />
-        <text dy={+20} width={200}>
-          Activité quotidienne
+        <Tooltip
+          separator=""
+          formatter={(value, name) => {
+            if (name === "Poids (kg)") {
+              return [`${value}kg`, ""];
+            } else if (name === "Calories brûlées (kCal)") {
+              return [`${value}kCal`, ""];
+            }
+            return ["", `${value}`];
+          }}
+          labelFormatter={() => ""}
+          contentStyle={{ backgroundColor: "#FF0101" }}
+          itemStyle={{ color: "#fff" }}
+        />
+        <text
+          x={80}
+          y={20}
+          fill="#000"
+          fontWeight="bold"
+          textAnchor="middle"
+          dominantBaseline="central"
+        >
+          <tspan fontSize="15">Activité Quotidienne</tspan>
         </text>
         <Legend
           height={40}

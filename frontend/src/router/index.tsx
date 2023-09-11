@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppWrapper from "../components/AppWrapper/AppWrapper";
-import HomePage from "../pages/HomePage/HomePage";
+import Dashboard from "../pages/Dashboard/Dashboard";
 import Profil from "../pages/Profil/Profil";
 import Settings from "../pages/Settings/Settings";
 import Community from "../pages/Community/Community";
@@ -11,7 +11,7 @@ const AppRouter = () => {
     <BrowserRouter>
       <AppWrapper>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/community" element={<Community />} />
