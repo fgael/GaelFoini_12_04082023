@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../services/api";
 
-interface UserInfo {
+interface UserInfoData {
   id: number;
   userInfos: {
     firstName: string;
@@ -19,7 +19,7 @@ interface UserInfo {
 }
 
 export const useUserInfo = (userId: number) => {
-  const [user, setUserInfo] = useState<UserInfo | null>(null);
+  const [user, setUserInfo] = useState<UserInfoData>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any | null>(null);
 
@@ -28,8 +28,10 @@ export const useUserInfo = (userId: number) => {
       try {
         const { data } = await getUserInfo(userId);
         setUserInfo(data);
+        setError(null);
         setLoading(false);
       } catch (error) {
+        console.log(error);
         setError(error);
         setLoading(false);
       }
