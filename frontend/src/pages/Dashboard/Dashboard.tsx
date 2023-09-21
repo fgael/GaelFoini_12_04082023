@@ -1,15 +1,20 @@
 import React from "react";
 import { useUserInfo } from "../../hooks/useUserInfo";
 import { useUserActivity } from "../../hooks/useUserActivity";
+import { useUserPerformance } from "../../hooks/useUserPerformance";
 
 // import module style
 import styles from "./Dashboard.module.scss";
 
 // import composant
 import CardIcon from "../../components/CardIcon/CardIcon";
-import ActivityBarChart from "../../components/Charts/ActivityBarChart";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Snackbar from "../../components/Snackbar/Snackbar";
+
+// import chart component
+import ActivityBarChart from "../../components/Charts/ActivityBarChart";
+import ScoreRadialBarChart from "../../components/Charts/ScoreRadialBarChart";
+import PerformanceRadarChart from "../../components/Charts/PerformanceRadarChart";
 
 // import icones
 import appleIcon from "../../assets/icons/apple.svg";
@@ -18,27 +23,43 @@ import chickenIcon from "../../assets/icons/chicken.svg";
 import energyIcon from "../../assets/icons/energy.svg";
 
 const Dashboard: React.FC = () => {
-  const { user, loading: userLoading, error: userError } = useUserInfo(12);
+  const { user, loading: userLoading, error: userError } = useUserInfo(18);
+
   const {
     userActivity,
     loading: activityLoading,
     error: activityError,
   } = useUserActivity(user?.id || 0);
 
+  const {
+    userPerformance,
+    loading: performanceLoading,
+    error: performanceError,
+  } = useUserPerformance(user?.id || 0);
+
   const isLoading =
-    (userLoading || activityLoading) &&
+    (userLoading || activityLoading || performanceLoading) &&
     !userError?.message &&
-    !activityError?.message;
+    !activityError?.message &&
+    !performanceError?.message;
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  const hasUserData = user && userActivity && !userError && !activityError;
+  const hasUserData =
+    user &&
+    userActivity &&
+    userPerformance &&
+    !userError &&
+    !activityError &&
+    !performanceError;
+
+  const hasError = userError || activityError || performanceError;
 
   return (
     <div className={styles.dashboard}>
-      {hasUserData ? (
+      {hasUserData && (
         <div>
           <h1>
             Bonjour
@@ -50,7 +71,6 @@ const Dashboard: React.FC = () => {
           <p className={styles.subtitle}>
             Félicitation ! Vous avez explosé vos objectifs hier 👏
           </p>
-          <p>Today's Score: {user?.todayScore || user?.score}</p>
           <div className="flex flex-row gap-4 lg:gap-8">
             {/* Partie de gauche */}
             <div className="flex flex-col grow justify-between gap-4 lg:gap-8 w-9/12 lg:w-10/12">
@@ -61,11 +81,13 @@ const Dashboard: React.FC = () => {
                 <div className="col-span-4">
                   <div className="h-64 bg-black"></div>
                 </div>
-                <div className="col-span-4">
-                  <div className="h-64 bg-red-900 "></div>
+                <div className="col-span-4 rounded-lg bg-[#282D30]">
+                  <PerformanceRadarChart userPerformance={userPerformance} />
                 </div>
-                <div className="col-span-4">
-                  <div className="h-64 bg-indigo-400"></div>
+                <div className="col-span-4 rounded-lg bg-[#FBFBFB]">
+                  <ScoreRadialBarChart
+                    userScore={user?.todayScore || user?.score}
+                  />
                 </div>
               </div>
             </div>
@@ -99,7 +121,8 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
-      ) : (
+      )}
+      {hasError && (
         <div>
           {[userError, activityError]
             .filter((error) => error)

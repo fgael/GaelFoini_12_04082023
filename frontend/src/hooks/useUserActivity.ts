@@ -25,7 +25,6 @@ export const useUserActivity = (userId: number) => {
               kilogram: session.kilogram,
             })
           );
-
           setUserActivity(formattedUserActivity);
           setError(null);
           setLoading(false);
