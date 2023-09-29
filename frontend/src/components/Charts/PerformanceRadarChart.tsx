@@ -45,7 +45,7 @@ const PerformanceRadarChart: React.FC<PerformanceRadarChartProps> = ({
   userPerformance,
 }) => {
   return (
-    <ResponsiveContainer>
+    <ResponsiveContainer width="100%" height={240}>
       <RadarChart cx="50%" cy="50%" outerRadius="65%" data={userPerformance}>
         <PolarGrid stroke="#fff" strokeWidth={2} radialLines={false} />
         <PolarAngleAxis

@@ -8,7 +8,7 @@ const ScoreRadialBarChart: React.FC<ScoreRadialBarChartProps> = ({
   userScore,
 }) => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height={240}>
       <RadialBarChart
         cx="50%"
         cy="50%"
@@ -18,7 +18,7 @@ const ScoreRadialBarChart: React.FC<ScoreRadialBarChartProps> = ({
         barSize={10}
         data={[{ score: userScore }]}
       >
-        <circle cx="50%" cy="50%" r="30%" fill="#FFFFFF" />
+        {/* <circle cx="50%" cy="50%" r="30%" fill="#FFFFFF" /> */}
         <text
           x={50}
           y={30}
