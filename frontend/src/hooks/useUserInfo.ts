@@ -18,6 +18,10 @@ interface UserInfoData {
   };
 }
 
+function formatNumberWithComma(number: number): string {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export const useUserInfo = (userId: number) => {
   const [user, setUserInfo] = useState<UserInfoData>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -27,7 +31,23 @@ export const useUserInfo = (userId: number) => {
     const fetchUserInfo = async () => {
       try {
         const { data } = await getUserInfo(userId);
-        setUserInfo(data);
+
+        const formattedKeyData = {
+          ...data.keyData,
+          calorieCount: formatNumberWithComma(data.keyData.calorieCount),
+          proteinCount: formatNumberWithComma(data.keyData.proteinCount),
+          carbohydrateCount: formatNumberWithComma(
+            data.keyData.carbohydrateCount
+          ),
+          lipidCount: formatNumberWithComma(data.keyData.lipidCount),
+        };
+
+        const formattedData = {
+          ...data,
+          keyData: formattedKeyData,
+        };
+
+        setUserInfo(formattedData);
         setError(null);
         setLoading(false);
       } catch (error) {

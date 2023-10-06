@@ -2,6 +2,7 @@ import React from "react";
 import { useUserInfo } from "../../hooks/useUserInfo";
 import { useUserActivity } from "../../hooks/useUserActivity";
 import { useUserPerformance } from "../../hooks/useUserPerformance";
+import { useUserAverageSessions } from "../../hooks/useUserAverageSession";
 
 // import module style
 import styles from "./Dashboard.module.scss";
@@ -15,6 +16,7 @@ import Snackbar from "../../components/Snackbar/Snackbar";
 import ActivityBarChart from "../../components/Charts/ActivityBarChart";
 import ScoreRadialBarChart from "../../components/Charts/ScoreRadialBarChart";
 import PerformanceRadarChart from "../../components/Charts/PerformanceRadarChart";
+import AverageSessionsLineChart from "../../components/Charts/AverageSessionsLineChart";
 
 // import icones
 import appleIcon from "../../assets/icons/apple.svg";
@@ -37,11 +39,21 @@ const Dashboard: React.FC = () => {
     error: performanceError,
   } = useUserPerformance(user?.id || 0);
 
+  const {
+    userAverageSessions,
+    loading: averageSessionsLoading,
+    error: averageSessionsError,
+  } = useUserAverageSessions(user?.id || 0);
+
   const isLoading =
-    (userLoading || activityLoading || performanceLoading) &&
+    (userLoading ||
+      activityLoading ||
+      performanceLoading ||
+      averageSessionsLoading) &&
     !userError?.message &&
     !activityError?.message &&
-    !performanceError?.message;
+    !performanceError?.message &&
+    !averageSessionsError?.message;
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -51,11 +63,14 @@ const Dashboard: React.FC = () => {
     user &&
     userActivity &&
     userPerformance &&
+    userAverageSessions &&
     !userError &&
     !activityError &&
-    !performanceError;
+    !performanceError &&
+    !averageSessionsError;
 
-  const hasError = userError || activityError || performanceError;
+  const hasError =
+    userError || activityError || performanceError || averageSessionsError;
 
   return (
     <div className={styles.dashboard}>
@@ -79,7 +94,9 @@ const Dashboard: React.FC = () => {
               </div>
               <div className="grid grid-cols-12 gap-4 lg:gap-8">
                 <div className="col-span-4">
-                  <div className="h-64 bg-black"></div>
+                  <AverageSessionsLineChart
+                    userAverageSessions={userAverageSessions}
+                  />
                 </div>
                 <div className="col-span-4 rounded-lg bg-[#282D30]">
                   <PerformanceRadarChart userPerformance={userPerformance} />
