@@ -31,7 +31,6 @@ export const useUserInfo = (userId: number) => {
     const fetchUserInfo = async () => {
       try {
         const { data } = await getUserInfo(userId);
-
         const formattedKeyData = {
           ...data.keyData,
           calorieCount: formatNumberWithComma(data.keyData.calorieCount),

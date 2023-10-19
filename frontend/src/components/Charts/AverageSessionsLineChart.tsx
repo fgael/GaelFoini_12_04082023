@@ -5,11 +5,37 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Rectangle,
 } from "recharts";
 
 interface AverageSessionsLineChartProps {
   userAverageSessions: any[];
 }
+
+interface CustomCursorProps {
+  points: { x: number; y: number }[];
+}
+
+const CustomCursor: React.FC<CustomCursorProps> = ({ points }) => {
+  if (!points.length) {
+    return null;
+  }
+
+  const X = points[0].x;
+  const Y = points[0].y;
+
+  return (
+    <g>
+      <Rectangle
+        width={500}
+        height={500}
+        x={X}
+        y={Y - 50}
+        style={{ opacity: 0.1 }}
+      />
+    </g>
+  );
+};
 
 const ActivityBarChart: React.FC<AverageSessionsLineChartProps> = ({
   userAverageSessions,
@@ -64,6 +90,7 @@ const ActivityBarChart: React.FC<AverageSessionsLineChartProps> = ({
           formatter={(value) => [`${value} min`]}
           labelFormatter={() => ""}
           itemStyle={{ color: "#000" }}
+          cursor={<CustomCursor points={[]} />}
         />
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">

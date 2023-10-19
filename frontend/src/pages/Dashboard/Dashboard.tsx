@@ -25,7 +25,7 @@ import chickenIcon from "../../assets/icons/chicken.svg";
 import energyIcon from "../../assets/icons/energy.svg";
 
 const Dashboard: React.FC = () => {
-  const { user, loading: userLoading, error: userError } = useUserInfo(18);
+  const { user, loading: userLoading, error: userError } = useUserInfo(12);
 
   const {
     userActivity,
