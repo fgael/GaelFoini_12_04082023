@@ -23,7 +23,7 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
         margin={{
           top: 5,
           right: 50,
-          left: 10,
+          left: 50,
           bottom: 5,
         }}
       >
@@ -77,7 +77,7 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
           iconSize={8}
           formatter={(value: string) => {
             return (
-              <span style={{ color: "#000", marginLeft: "10px" }}>{value}</span>
+              <span style={{ color: "#000", marginLeft: "8px" }}>{value}</span>
             );
           }}
         />
