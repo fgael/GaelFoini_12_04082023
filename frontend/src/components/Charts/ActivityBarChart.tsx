@@ -22,8 +22,8 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
         data={userActivity}
         margin={{
           top: 5,
-          right: 30,
-          left: 30,
+          right: 50,
+          left: 10,
           bottom: 5,
         }}
       >
@@ -32,7 +32,7 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
           dataKey="number"
           tickLine={false}
           axisLine={false}
-          scale="point"
+          padding={{ left: -50, right: -50 }}
         />
         <YAxis
           dataKey="kilogram"
@@ -42,7 +42,7 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
           axisLine={false}
           allowDecimals={false}
           tickLine={false}
-          tickMargin={25}
+          tickMargin={50}
         />
         <YAxis dataKey="calories" yAxisId={2} hide />
         <Tooltip
@@ -75,6 +75,11 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
           align="right"
           iconType="circle"
           iconSize={8}
+          formatter={(value: string) => {
+            return (
+              <span style={{ color: "#000", marginLeft: "10px" }}>{value}</span>
+            );
+          }}
         />
         <Bar
           dataKey="kilogram"
