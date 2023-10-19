@@ -1,25 +1,30 @@
 import { useEffect, useState } from "react";
 import { getUserPerformance } from "../services/api.js";
 
+// Etablissement de la tructure des données de performance utilisateur
 interface UserPerformanceData {
   kind: string;
   value: number;
 }
 
 export const useUserPerformance = (userId: number) => {
+  // Etat pour stocker données d'activité de performance
   const [userPerformance, setUserPerformance] = useState<UserPerformanceData[]>(
     []
   );
+  // Etat pour gérer le chargement
   const [loading, setLoading] = useState<boolean>(true);
+  // Etat pour gérer les erreurs
   const [error, setError] = useState<any | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       if (userId !== 0) {
         try {
+          // Appel asynchrone pour obtenir les données brutes de performance
           const { data } = await getUserPerformance(userId);
 
-          // traduction
+          // Traduction des types de performance en utilisant un mapping
           const kindMapping: Record<string, string> = {
             "1": "Cardio",
             "2": "Energie",
@@ -29,7 +34,7 @@ export const useUserPerformance = (userId: number) => {
             "6": "Intensité",
           };
 
-          // ordre
+          // Ordre spécifique pour afficher les types de performance
           const specificOrder: string[] = [
             "Intensité",
             "Vitesse",
@@ -39,6 +44,7 @@ export const useUserPerformance = (userId: number) => {
             "Cardio",
           ];
 
+          // Formatage des données en associant le type à sa traduction et tri par ordre spécifique
           const formattedUserPerformance: UserPerformanceData[] = data.data
             .map((entry: any) => ({
               kind: kindMapping[entry.kind.toString()] || entry.kind,
@@ -49,19 +55,25 @@ export const useUserPerformance = (userId: number) => {
                 specificOrder.indexOf(a.kind) - specificOrder.indexOf(b.kind)
             );
 
+          // Mise à jour de l'état avec les données formatées
           setUserPerformance(formattedUserPerformance);
+          // Réinitialisation de l'état d'erreur
           setError(null);
+          // Fin du chargement
           setLoading(false);
         } catch (error) {
+          // Gestion des erreurs en cas d'échec de l'appel asynchrone
           console.log(error);
           setError(error);
+          // Fin du chargement
           setLoading(false);
         }
       }
     };
 
     fetchData();
+    // L'effet dépend de userId
   }, [userId]);
-
+  // Retourne un objet contenant les données de performance de l'utilisateur, l'état de chargement et les erreurs
   return { userPerformance, loading, error };
 };

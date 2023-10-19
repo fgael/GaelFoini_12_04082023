@@ -9,8 +9,10 @@ import Error404 from "../pages/Error404/Error404";
 const AppRouter = () => {
   return (
     <BrowserRouter>
+      {/* Encapsule l'ensemble de l'UI dans AppWrapper */}
       <AppWrapper>
         <Routes>
+          {/* Définition des routes*/}
           <Route path="/" element={<Dashboard />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/settings" element={<Settings />} />
