@@ -1,30 +1,33 @@
 import React from "react";
+
+// Import hooks
 import { useUserInfo } from "../../hooks/useUserInfo";
 import { useUserActivity } from "../../hooks/useUserActivity";
 import { useUserPerformance } from "../../hooks/useUserPerformance";
 import { useUserAverageSessions } from "../../hooks/useUserAverageSession";
 
-// import module style
+// Import module style
 import styles from "./Dashboard.module.scss";
 
-// import composant
+// Import composant
 import CardIcon from "../../components/CardIcon/CardIcon";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Snackbar from "../../components/Snackbar/Snackbar";
 
-// import chart component
+// Import composant chart
 import ActivityBarChart from "../../components/Charts/ActivityBarChart";
 import ScoreRadialBarChart from "../../components/Charts/ScoreRadialBarChart";
 import PerformanceRadarChart from "../../components/Charts/PerformanceRadarChart";
 import AverageSessionsLineChart from "../../components/Charts/AverageSessionsLineChart";
 
-// import icones
+// Import icones
 import appleIcon from "../../assets/icons/apple.svg";
 import cheeseburgerIcon from "../../assets/icons/cheeseburger.svg";
 import chickenIcon from "../../assets/icons/chicken.svg";
 import energyIcon from "../../assets/icons/energy.svg";
 
 const Dashboard: React.FC = () => {
+  // Utilisation hooks pour récupérer les données de l'utilisateur
   const { user, loading: userLoading, error: userError } = useUserInfo(12);
 
   const {
@@ -45,6 +48,7 @@ const Dashboard: React.FC = () => {
     error: averageSessionsError,
   } = useUserAverageSessions(user?.id || 0);
 
+  // Vérification de l'état de chargement global
   const isLoading =
     (userLoading ||
       activityLoading ||
@@ -55,10 +59,12 @@ const Dashboard: React.FC = () => {
     !performanceError?.message &&
     !averageSessionsError?.message;
 
+  // Affichage du composant loading spinner en cas de chargement
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
+  // Vérification de la disponibilité des données de l'utilisateur et de l'absence d'erreurs
   const hasUserData =
     user &&
     userActivity &&
@@ -69,6 +75,7 @@ const Dashboard: React.FC = () => {
     !performanceError &&
     !averageSessionsError;
 
+  // Vérification de la présence d'erreurs
   const hasError =
     userError || activityError || performanceError || averageSessionsError;
 
@@ -87,13 +94,13 @@ const Dashboard: React.FC = () => {
             Félicitation ! Vous avez explosé vos objectifs hier 👏
           </p>
           <div className="flex flex-row gap-4 lg:gap-8">
-            {/* Partie de gauche */}
+            {/* Partie de gauche graph */}
             <div className="flex flex-col grow justify-between gap-4 lg:gap-8 w-9/12 lg:w-10/12">
-              <div className="bg-gray-50 p-4 rounded-lg">
+              <div className="p-4 rounded-lg bg-gray-50">
                 <ActivityBarChart userActivity={userActivity} />
               </div>
               <div className="grid grid-cols-12 gap-4 lg:gap-8">
-                <div className="col-span-4">
+                <div className="col-span-4 rounded-lg bg-[#FF0000]">
                   <AverageSessionsLineChart
                     userAverageSessions={userAverageSessions}
                   />
@@ -108,8 +115,7 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
             </div>
-
-            {/* Partie de droite */}
+            {/* Partie de droite composant card icons*/}
             <div className="flex flex-col justify-between w-3/12 lg:w-2/12">
               <CardIcon
                 icon={energyIcon}
@@ -139,6 +145,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       )}
+      {/* Affichage erreur avec le composant snackbar */}
       {hasError && (
         <div>
           {[userError, activityError]

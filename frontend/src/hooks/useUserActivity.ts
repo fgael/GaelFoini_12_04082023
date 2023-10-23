@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getUserActivity } from "../services/api.js";
 
 // Etablissement de la tructure des données d'activité
-interface UserActivityData {
+export interface UserActivityData {
   number: number;
   day: string;
   kilogram: number;

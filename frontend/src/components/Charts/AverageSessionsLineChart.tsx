@@ -8,8 +8,10 @@ import {
   Rectangle,
 } from "recharts";
 
+import { UserAverageSessionsData } from "../../hooks/useUserAverageSession";
+
 interface AverageSessionsLineChartProps {
-  userAverageSessions: any[];
+  userAverageSessions: UserAverageSessionsData[];
 }
 
 interface CustomCursorProps {
@@ -44,7 +46,6 @@ const ActivityBarChart: React.FC<AverageSessionsLineChartProps> = ({
     <ResponsiveContainer width="100%" height={240}>
       <LineChart
         data={userAverageSessions}
-        style={{ background: "#FF0000", borderRadius: "10px" }}
         margin={{ bottom: 10, top: 10, left: 10, right: 10 }}
       >
         <text

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getUserAverageSessions } from "../services/api.js";
 
 // Etablissement de la tructure des données de session
-interface UserAverageSessionsData {
+export interface UserAverageSessionsData {
   day: number;
   sessionLength: number;
   dayLetter: string;

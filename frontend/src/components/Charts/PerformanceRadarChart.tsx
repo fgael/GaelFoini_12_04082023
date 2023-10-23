@@ -9,8 +9,10 @@ import {
   Text,
 } from "recharts";
 
+import { UserPerformanceData } from "../../hooks/useUserPerformance";
+
 interface PerformanceRadarChartProps {
-  userPerformance: any[];
+  userPerformance: UserPerformanceData[];
 }
 
 interface RenderPolarAngleAxisProps {

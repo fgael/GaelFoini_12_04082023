@@ -9,8 +9,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import { UserActivityData } from "../../hooks/useUserActivity";
+
+// Interface pour les props du composant
 interface ActivityBarChartProps {
-  userActivity: any[];
+  userActivity: UserActivityData[];
 }
 
 const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
@@ -29,22 +32,24 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
       >
         <CartesianGrid strokeDasharray="2 2" vertical={false} />
         <XAxis
-          dataKey="number"
-          tickLine={false}
-          axisLine={false}
+          dataKey="number" // La clé des données pour l'axe X
+          tickLine={false} // Supprime les lignes de repère
+          axisLine={false} // Supprime la ligne d'axe
           padding={{ left: -50, right: -50 }}
         />
         <YAxis
-          dataKey="kilogram"
-          yAxisId={1}
-          domain={["dataMin - 10", "dataMax + 10"]}
-          orientation="right"
-          axisLine={false}
-          allowDecimals={false}
-          tickLine={false}
-          tickMargin={50}
+          dataKey="kilogram" // La clé des données pour l'axe Y
+          yAxisId={1} // Identifiant de l'axe Y
+          domain={["dataMin - 10", "dataMax + 10"]} // Domaine des valeurs (avec une marge)
+          orientation="right" // Orientation de l'axe à droite
+          axisLine={false} // Supprime la ligne d'axe
+          allowDecimals={false} // Empêche les décimales sur l'axe
+          tickLine={false} // Supprime les lignes de repère
+          tickMargin={50} // Marge entre les repères
         />
+        {/* Axe Y (à gauche) : représente les valeurs en calories (Calories brûlées) */}
         <YAxis dataKey="calories" yAxisId={2} hide />
+        {/* Infobulle du graphique */}
         <Tooltip
           separator=""
           formatter={(value, name) => {
@@ -55,10 +60,11 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
             }
             return ["", `${value}`];
           }}
-          labelFormatter={() => ""}
-          contentStyle={{ backgroundColor: "#FF0101" }}
-          itemStyle={{ color: "#fff" }}
+          labelFormatter={() => ""} // Masque le label
+          contentStyle={{ backgroundColor: "#FF0101" }} // Style de l'infobulle
+          itemStyle={{ color: "#fff" }} // Style des éléments de l'infobulle
         />
+        {/* Titre du graphique */}
         <text
           x={80}
           y={20}
@@ -69,6 +75,7 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
         >
           <tspan fontSize="15">Activité Quotidienne</tspan>
         </text>
+        {/* Légende du graphique */}
         <Legend
           height={40}
           verticalAlign="top"
@@ -81,21 +88,23 @@ const ActivityBarChart: React.FC<ActivityBarChartProps> = ({
             );
           }}
         />
+        {/* Barres de données (Poids en kg) */}
         <Bar
           dataKey="kilogram"
-          yAxisId={1}
-          fill="#282D30"
-          barSize={10}
-          radius={[15, 15, 0, 0]}
-          name="Poids (kg)"
+          yAxisId={1} // Lier à l'axe Y avec l'ID 1
+          fill="#282D30" // Couleur de remplissage
+          barSize={10} // Largeur des barres
+          radius={[15, 15, 0, 0]} // Radius des barres
+          name="Poids (kg)" // Nom dans la légende
         />
+        {/* Barres de données (Calories brûlées en kCal) */}
         <Bar
           dataKey="calories"
-          yAxisId={2}
-          fill="#E60000"
-          barSize={10}
-          radius={[15, 15, 0, 0]}
-          name="Calories brûlées (kCal)"
+          yAxisId={2} // Lier à l'axe Y avec l'ID 2 (masqué)
+          fill="#E60000" // Couleur de remplissage
+          barSize={10} // Largeur des barres
+          radius={[15, 15, 0, 0]} // Radius des barres
+          name="Calories brûlées (kCal)" // Nom dans la légende
         />
       </BarChart>
     </ResponsiveContainer>

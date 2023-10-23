@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getUserPerformance } from "../services/api.js";
 
 // Etablissement de la tructure des données de performance utilisateur
-interface UserPerformanceData {
+export interface UserPerformanceData {
   kind: string;
   value: number;
 }
