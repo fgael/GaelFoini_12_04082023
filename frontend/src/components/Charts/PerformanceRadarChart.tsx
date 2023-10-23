@@ -23,6 +23,7 @@ interface RenderPolarAngleAxisProps {
   cy: number;
 }
 
+// Fonction de rendu personnalisée pour les étiquettes de l'axe polar
 const renderPolarAngleAxis = ({
   payload,
   x,
@@ -34,9 +35,9 @@ const renderPolarAngleAxis = ({
   return (
     <Text
       {...rest}
-      verticalAnchor="middle"
-      y={y + (y - cy) / 10}
-      x={x + (x - cx) / 100}
+      verticalAnchor="middle" // Alignement vertical au milieu
+      y={y + (y - cy) / 10} // Position verticale de l'étiquette
+      x={x + (x - cx) / 100} // Position horizontale de l'étiquette
     >
       {payload.value}
     </Text>
@@ -56,7 +57,7 @@ const PerformanceRadarChart: React.FC<PerformanceRadarChartProps> = ({
           fontSize={12}
           strokeWidth={2}
           tickLine={false}
-          tick={renderPolarAngleAxis}
+          tick={renderPolarAngleAxis} // Utilisation de la fonction de rendu personnalisée pour les étiquettes de l'axe
         />
         <Radar
           dataKey={"value"}

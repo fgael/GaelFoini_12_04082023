@@ -38,7 +38,7 @@ Le site SportSee propose les fonctionnalités suivantes :
 - Navigation entre les différentes pages en utilisant React Router.
 - Redirection vers une page Erreur 404 en cas d'URL non valide.
 - Utilisation de composants réutilisables.
-- Création d'un mock des données de l'API pour le développement initial.
+- Utilisation de fetch et hooks séparés des pages et composants afin de faciliter la maintenabilité.
 - Formatage standard des données de l'API pour garantir leur utilisation cohérente.
 - Documentation du projet pour faciliter la collaboration, incluant un Readme et des interfaces TypeScript.
 
@@ -61,7 +61,7 @@ cd Sportsee/
 git clone https://github.com/fgael/GaelFoini_12_04082023
 cd GaelFoini_12_04082023/frontend/
 npm i
-cd ..
+cd ../..
 git clone https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard
 cd P9-front-end-dashboard/
 npm i

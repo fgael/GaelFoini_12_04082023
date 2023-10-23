@@ -18,7 +18,6 @@ const ScoreRadialBarChart: React.FC<ScoreRadialBarChartProps> = ({
         barSize={10}
         data={[{ score: userScore }]}
       >
-        {/* <circle cx="50%" cy="50%" r="30%" fill="#FFFFFF" /> */}
         <text
           x={50}
           y={30}
@@ -45,7 +44,7 @@ const ScoreRadialBarChart: React.FC<ScoreRadialBarChartProps> = ({
           dominantBaseline="middle"
         >
           <tspan dy="0.8em" fontSize="26">
-            {userScore * 100}%
+            {userScore * 100}% {/* Affichage du score en pourcentage */}
           </tspan>
         </text>
         <text
