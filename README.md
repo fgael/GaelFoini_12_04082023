@@ -57,8 +57,9 @@ Creer un dossier dans lequel vous allez clonez :
 
 ```
 mkdir SportSee
+cd Sportsee/
 git clone https://github.com/fgael/GaelFoini_12_04082023
-cd GaelFoini_12_04082023/
+cd GaelFoini_12_04082023/frontend/
 npm i
 cd ..
 git clone https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard
@@ -72,7 +73,7 @@ cd ..
 Partie frontend : Ouvrir un terminal à partir du dossier SportSee
 
 ```
-cd GaelFoini_12_04082023/
+cd GaelFoini_12_04082023/frontend/
 npm run dev
 ```
 
