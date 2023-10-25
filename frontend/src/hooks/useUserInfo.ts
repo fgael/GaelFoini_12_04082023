@@ -30,7 +30,7 @@ export const useUserInfo = (userId: number) => {
   // Etat pour gérer le chargement
   const [loading, setLoading] = useState<boolean>(true);
   // Etat pour gérer les erreurs
-  const [error, setError] = useState<any | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -66,7 +66,11 @@ export const useUserInfo = (userId: number) => {
       } catch (error) {
         // Gestion des erreurs en cas d'échec de l'appel asynchrone
         console.log(error);
-        setError(error);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("Une erreur inconnue s'est produite");
+        }
         // Fin du chargement
         setLoading(false);
       }

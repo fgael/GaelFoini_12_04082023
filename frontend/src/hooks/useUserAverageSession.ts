@@ -8,6 +8,17 @@ export interface UserAverageSessionsData {
   dayLetter: string;
 }
 
+// Tableau de correspondance des jours
+const dayMapping: { [key: number]: string } = {
+  1: "L",
+  2: "M",
+  3: "M",
+  4: "J",
+  5: "V",
+  6: "S",
+  7: "D",
+};
+
 export const useUserAverageSessions = (userId: number) => {
   // Etat pour stocker données de session de l'utilisateur
   const [userAverageSessions, setUserAverageSessions] = useState<
@@ -16,18 +27,7 @@ export const useUserAverageSessions = (userId: number) => {
   // Etat pour gérer le chargement
   const [loading, setLoading] = useState<boolean>(true);
   // Etat pour gérer les erreurs
-  const [error, setError] = useState<any | null>(null);
-
-  // Tableau de correspondance des jours
-  const dayMapping: { [key: number]: string } = {
-    1: "L",
-    2: "M",
-    3: "M",
-    4: "J",
-    5: "V",
-    6: "S",
-    7: "D",
-  };
+  const [error, setError] = useState<string | null>(null);
 
   // Effet qui s'exécute lorsque userId change
   useEffect(() => {
@@ -52,7 +52,11 @@ export const useUserAverageSessions = (userId: number) => {
         } catch (error) {
           // Gestion des erreurs en cas d'échec de l'appel asynchrone
           console.log(error);
-          setError(error);
+          if (error instanceof Error) {
+            setError(error.message);
+          } else {
+            setError("Une erreur inconnue s'est produite");
+          }
           // Fin du chargement
           setLoading(false);
         }

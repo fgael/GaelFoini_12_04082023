@@ -15,7 +15,7 @@ export const useUserActivity = (userId: number) => {
   // Etat pour gérer le chargement
   const [loading, setLoading] = useState<boolean>(true);
   // Etat pour gérer les erreurs
-  const [error, setError] = useState<any | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Effet qui s'exécute lorsque userId change
   useEffect(() => {
@@ -42,7 +42,11 @@ export const useUserActivity = (userId: number) => {
         } catch (error) {
           // Gestion des erreurs en cas d'échec de l'appel asynchrone
           console.log(error);
-          setError(error);
+          if (error instanceof Error) {
+            setError(error.message);
+          } else {
+            setError("Une erreur inconnue s'est produite");
+          }
           // Fin du chargement
           setLoading(false);
         }

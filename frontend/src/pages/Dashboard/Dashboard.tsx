@@ -54,10 +54,10 @@ const Dashboard: React.FC = () => {
       activityLoading ||
       performanceLoading ||
       averageSessionsLoading) &&
-    !userError?.message &&
-    !activityError?.message &&
-    !performanceError?.message &&
-    !averageSessionsError?.message;
+    (!userError || typeof userError === "string") &&
+    (!activityError || typeof activityError === "string") &&
+    (!performanceError || typeof performanceError === "string") &&
+    (!averageSessionsError || typeof averageSessionsError === "string");
 
   // Affichage du composant loading spinner en cas de chargement
   if (isLoading) {
@@ -148,10 +148,15 @@ const Dashboard: React.FC = () => {
       {/* Affichage erreur avec le composant snackbar */}
       {hasError && (
         <div>
-          {[userError, activityError]
+          {[userError, activityError, performanceError, averageSessionsError]
             .filter((error) => error)
             .map((error, index) => (
-              <Snackbar key={index} message={`Erreur : ${error.message}`} />
+              <Snackbar
+                key={index}
+                message={`Erreur : ${
+                  typeof error === "string" ? error : "Erreur inconnue"
+                }`}
+              />
             ))}
         </div>
       )}

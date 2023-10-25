@@ -16,7 +16,7 @@ interface PerformanceRadarChartProps {
 }
 
 interface RenderPolarAngleAxisProps {
-  payload: any;
+  payload: UserPerformanceData;
   x: number;
   y: number;
   cx: number;
