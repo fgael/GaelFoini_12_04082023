@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../services/api";
 
+// Import user info data mock
+import { userInfoMockData } from "../mocks/userInfosMockData.ts";
+
 // Etablissement de la tructure des données utilisateur
 interface UserInfoData {
   id: number;
@@ -35,9 +38,14 @@ export const useUserInfo = (userId: number) => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        // Appel asynchrone pour récupérer les données de l'utilisateur
-        const { data } = await getUserInfo(userId);
-
+        let data;
+        if (userId === 0) {
+          data = userInfoMockData;
+        } else {
+          // Appel asynchrone pour récupérer les données de l'utilisateur
+          const response = await getUserInfo(userId);
+          data = response.data;
+        }
         // Création d'un nouvel objet formattedKeyData en copiant les propriétés de data.keyData
         // et en appliquant la fonction de formatage formatNumberWithComma
         const formattedKeyData = {

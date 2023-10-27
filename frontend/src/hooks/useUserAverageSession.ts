@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getUserAverageSessions } from "../services/api.js";
 
+import { userAverageSessionMockData } from "../mocks/userAverageSessionMockData.js";
+
 // Etablissement de la tructure des données de session
 export interface UserAverageSessionsData {
   day: number;
@@ -32,34 +34,38 @@ export const useUserAverageSessions = (userId: number) => {
   // Effet qui s'exécute lorsque userId change
   useEffect(() => {
     const fetchData = async () => {
-      if (userId !== 0) {
-        try {
-          // Appel asynchrone pour récupérer les données de session de l'utilisateur
-          const { data } = await getUserAverageSessions(userId);
-          // Formatage des données pour y ajouter les lettres des jours de la semaine en correspondance avec la valeur day
-          const formattedUserAverageSessions = data.sessions.map(
-            (session: UserAverageSessionsData) => ({
-              ...session,
-              dayLetter: dayMapping[session.day],
-            })
-          );
-          // Mise à jour de l'état avec les données formatées
-          setUserAverageSessions(formattedUserAverageSessions);
-          // Réinitialisation de l'état d'erreur
-          setError(null);
-          // Fin du chargement
-          setLoading(false);
-        } catch (error) {
-          // Gestion des erreurs en cas d'échec de l'appel asynchrone
-          console.log(error);
-          if (error instanceof Error) {
-            setError(error.message);
-          } else {
-            setError("Une erreur inconnue s'est produite");
-          }
-          // Fin du chargement
-          setLoading(false);
+      try {
+        let data;
+        if (userId === 0) {
+          data = userAverageSessionMockData;
+        } else {
+          // Appel asynchrone pour récupérer les données de sessions de l'utilisateur
+          const response = await getUserAverageSessions(userId);
+          data = response.data;
         }
+        // Formatage des données pour y ajouter les lettres des jours de la semaine en correspondance avec la valeur day
+        const formattedUserAverageSessions = data.sessions.map(
+          (session: UserAverageSessionsData) => ({
+            ...session,
+            dayLetter: dayMapping[session.day],
+          })
+        );
+        // Mise à jour de l'état avec les données formatées
+        setUserAverageSessions(formattedUserAverageSessions);
+        // Réinitialisation de l'état d'erreur
+        setError(null);
+        // Fin du chargement
+        setLoading(false);
+      } catch (error) {
+        // Gestion des erreurs en cas d'échec de l'appel asynchrone
+        console.log(error);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("Une erreur inconnue s'est produite");
+        }
+        // Fin du chargement
+        setLoading(false);
       }
     };
 

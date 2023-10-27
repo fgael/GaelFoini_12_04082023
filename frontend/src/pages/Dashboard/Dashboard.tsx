@@ -28,7 +28,9 @@ import energyIcon from "../../assets/icons/energy.svg";
 
 const Dashboard: React.FC = () => {
   // Utilisation hooks pour récupérer les données de l'utilisateur
-  const { user, loading: userLoading, error: userError } = useUserInfo(12);
+  // Params de useUserInfo 12 et 18 pour utiliser les data de l'API
+  // Remplacer le params de useUserInfo par 0 pour utiliser les data de mock
+  const { user, loading: userLoading, error: userError } = useUserInfo(0);
 
   const {
     userActivity,
