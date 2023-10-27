@@ -24,6 +24,7 @@ export const useUserPerformance = (userId: number) => {
       try {
         let data;
         if (userId === 0) {
+          // Utilisation des data mock
           data = userPerformanceMockData;
         } else {
           // Appel asynchrone pour obtenir les données brutes de performance

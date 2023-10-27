@@ -25,6 +25,7 @@ export const useUserActivity = (userId: number) => {
       try {
         let data;
         if (userId === 0) {
+          // Utilisation des data mock
           data = userActivityMockData;
         } else {
           // Appel asynchrone pour récupérer les données d'activité de l'utilisateur

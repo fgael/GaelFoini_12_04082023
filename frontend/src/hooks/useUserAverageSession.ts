@@ -37,6 +37,7 @@ export const useUserAverageSessions = (userId: number) => {
       try {
         let data;
         if (userId === 0) {
+          // Utilisation des data mock
           data = userAverageSessionMockData;
         } else {
           // Appel asynchrone pour récupérer les données de sessions de l'utilisateur
