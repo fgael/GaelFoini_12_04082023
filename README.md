@@ -84,6 +84,22 @@ cd P9-front-end-dashboard/
 npm run dev
 ```
 
+### Utilisation de données mock ou de l'API
+
+Ouvrir le fichier frontend/src/pages/Dashboard/Dashboard.ts
+
+Pour utiliser les données mock utiliser l'id 0 en params de useUserInfo()
+
+```
+const { user, loading: userLoading, error: userError } = useUserInfo(0);
+```
+
+Pour utiliser les données de l'API utiliser l'id 12 ou 18 en params de useUserInfo()
+
+```
+const { user, loading: userLoading, error: userError } = useUserInfo(12);
+```
+
 ## Contact
 
 Gaël Foini - gaelfoinidev@gmail.com
